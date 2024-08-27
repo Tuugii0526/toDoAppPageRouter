@@ -22,14 +22,30 @@ export default function ToDoUsingNext() {
       },
     ]);
   };
-  const editTask =()=>{
-
+  const editTask =(id,title)=>{
+   setToDos(toDos.map(toDo=>{
+    if(toDo.id===id)
+    {
+      return {
+        ...toDo,title:title
+      }
+    }
+    else
+    {
+      return toDo
+    }
+   }))
   }
-  const deleteTask=()=>{
-    
+  const deleteTask=(id)=>{
+    setToDos(toDos.filter(toDo=>{
+      if(toDo.id!==id)
+      {
+        return toDo
+      }
+    }))
   }
   return <div className="w-full h-screen flex flex-col justify-center items-center gap-5">
   <AddToDo addTask={handleAddToDo}/>
-  <TaskList toDos={toDos}/>
+  <TaskList toDos={toDos} editTask={editTask} deleteTask={deleteTask}/>
   </div>
 }
